@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from partituras.modelo.errores import *
 
 
 class ReglaTransformacion(ABC):
@@ -24,14 +25,38 @@ class ReglaTransformacion(ABC):
     def encontrar_caracteres_invalidos(self, partitura : str) -> list:
         return [i for i, char in enumerate(partitura) if ord(char) > 127]
 
+
 class ReglaTransposicion(ReglaTransformacion):
+    def partitura_valida(self, partitura : str) -> bool:
+        return True
+
     def transformar(self, partitura: str) -> str:
-        pass
+        partitura = partitura.lower()
+        return ""
 
     def revertir(self, partitura: str) -> str:
+        return ""
+
+
+class ReglaFrecuencia(ReglaTransformacion):
+    def transformar(self, partitura : str) -> str:
+        pass
+
+    def revertir(self, partitura : str) -> str:
         pass
 
     def partitura_valida(self, partitura : str) -> bool:
+        pass
+
+
+class Compositor:
+    def __init__(self, interprete : ReglaTransformacion):
+        self.interprete = interprete
+
+    def transformar(self, partitura : str) -> str:
+        pass
+
+    def revertir(self, partitura : str) -> str:
         pass
 
 
