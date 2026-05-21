@@ -1,6 +1,4 @@
 from abc import ABC, abstractmethod
-from partituras.modelo.errores import *
-
 
 class ReglaTransformacion(ABC):
     def __init__(self, token: int):
@@ -39,14 +37,15 @@ class ReglaTransposicion(ReglaTransformacion):
 
 
 class ReglaFrecuencia(ReglaTransformacion):
+    def partitura_valida(self, partitura : str) -> bool:
+        return True
+
     def transformar(self, partitura : str) -> str:
-        pass
+        frecuencia = {"do": 261, "re": 293, "mi": 329, "fa": 349, "sol": 392, "la": 440, "si": 493}
+        return ""
 
     def revertir(self, partitura : str) -> str:
-        pass
-
-    def partitura_valida(self, partitura : str) -> bool:
-        pass
+        return ""
 
 
 class Compositor:
@@ -54,10 +53,12 @@ class Compositor:
         self.interprete = interprete
 
     def transformar(self, partitura : str) -> str:
-        pass
+        return self.interprete.transformar(partitura)
 
     def revertir(self, partitura : str) -> str:
-        pass
+        return self.interprete.revertir(partitura)
+
+
 
 
 
